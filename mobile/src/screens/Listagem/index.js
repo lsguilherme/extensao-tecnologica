@@ -44,7 +44,7 @@ export function Listagem( {route, navigation }) {
     <ListItem 
       bottomDivider
       onPress={
-        ()=>navigation.navigate('CadastroContato', {
+        ()=>navigation.navigate('Contatos', {
             nome: user.nome, 
             telefone: user.telefone, 
             email: user.email, 
@@ -74,7 +74,7 @@ export function Listagem( {route, navigation }) {
                         color="white" 
                         
                     />}
-                onPress={()=>alert('teste')}
+                onPress={()=>navigation.navigate('Contatos')}
             />
             }
         />
