@@ -45,6 +45,7 @@ export function Inicio({ navigation }) {
             <Button 
                 title="Entrar"
                 buttonStyle={styles.button}
+                onPress={()=>navigation.navigate('Listagem')}
             />
             <Button 
                 title="Cadastrar-se"
