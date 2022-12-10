@@ -64,7 +64,7 @@ export function Contatos({ route, navigation }) {
     const deletarContato = "http://professornilson.com/testeservico/clientes/" + getId
 
     await axios.delete(deletarContato)
-    .then(function(response){
+    .then(function(){
         setNome('');
         setEmail('');
         setTelefone('');

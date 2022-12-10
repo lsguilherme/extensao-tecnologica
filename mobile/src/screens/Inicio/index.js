@@ -7,6 +7,8 @@ import { Avatar, Button, Input } from 'react-native-elements';
 import { styles } from './styles';
 
 export function Inicio({ navigation }) {
+
+  
   return (
     <KeyboardAvoidingView 
         behavior={Platform.OS == "ios" ? "padding" : "height"}

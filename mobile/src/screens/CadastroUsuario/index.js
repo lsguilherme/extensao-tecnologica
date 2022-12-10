@@ -1,10 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { KeyboardAvoidingView, ScrollView, TouchableOpacity, View, Image, Text } from 'react-native';
 import { Button, Header, Input } from 'react-native-elements';
 
 import { styles } from './styles';
 
-export function CadastroUsuario({ navigation }) {
+import axios from 'axios';
+
+export function CadastroUsuario({ route, navigation }) {
+  
+  const [getEmail, setEmail] = useState();
+  const [getSenha, setSenha] = useState();
+
+  useEffect(() => {
+    if(route.params) {
+      const { email } = route.params;
+      const { senha } = route.params;
+      
+      setEmail(email);
+      setSenha(senha);
+    }
+  }, [])
+  
+  async function cadastrar() {
+    await axios.post('http://10.0.0.100:9090',{
+      email: getEmail,
+      senha: getSenha 
+    })
+    .then(() => {
+      setEmail('')
+      setSenha('')
+      alert('Conta criada com sucesso');
+    })
+    .catch(error => console.log(error))
+  }
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS == "ios" ? "padding" : "height"}
@@ -38,6 +66,8 @@ export function CadastroUsuario({ navigation }) {
               label='Email'
               placeholder='Email'
               containerStyle={styles.input}
+              onChangeText={text=>setEmail(text)}
+              value={getEmail}
             />
             
             <Input
@@ -45,11 +75,13 @@ export function CadastroUsuario({ navigation }) {
               label='Senha'
               placeholder='Senha'
               containerStyle={styles.input}
+              onChangeText={text=>setSenha(text)}
+              value={getSenha}
             />
           </View>
 
         <View style={styles.buttonContainer}>
-          <Button title='Salvar' buttonStyle={styles.button} onPress={()=>navigation.navigate("Inicio")}
+          <Button title='Salvar' buttonStyle={styles.button} onPress={()=>cadastrar()}
         />
         
         </View>
