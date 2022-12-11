@@ -24,7 +24,7 @@ export function Listagem( {route, navigation }) {
 
     resgatarDados();
   
-  }, [])
+  })
 
   
 

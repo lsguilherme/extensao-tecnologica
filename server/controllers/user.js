@@ -10,6 +10,24 @@ export const getUsers = (request, response) =>{
     })
 }
 
+export const getLogin = (request, response) =>{
+    const busca = `SELECT * FROM usuarios WHERE email = "${request.body.email}" AND senha = "${request.body.senha}"`
+    
+
+    const values = [
+        request.body.email,
+        request.body.senha
+    ]
+
+    db.query(busca, (err, data) => {
+        if(err) return response.json(err);
+        
+        /* console.log(data)
+        response.json(data[0]) */
+        return response.status(200).json(data)
+    })
+}
+
 export const addUser = (request, response) => {
     const busca = "INSERT INTO usuarios(`email`, `senha`) VALUES(?)"
 
@@ -18,7 +36,7 @@ export const addUser = (request, response) => {
         request.body.senha
     ];
 
-    db.query(busca, [values], (err, data) => {
+    db.query(busca, [values], (err) => {
         if (err) return response.json(err);
 
         return response.status(200).json("Usuário criado com sucesso!!")
@@ -34,3 +52,5 @@ export const deleteUser = (request, response) => {
         return response.status(200).json("Usuário deletado com sucesso!!")
     })
 }
+
+

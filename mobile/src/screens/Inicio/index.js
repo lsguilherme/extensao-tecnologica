@@ -1,4 +1,5 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
 import { KeyboardAvoidingView, Platform, View, Text, ScrollView } from 'react-native';
 import { Avatar, Button, Input } from 'react-native-elements';
 
@@ -7,6 +8,24 @@ import { Avatar, Button, Input } from 'react-native-elements';
 import { styles } from './styles';
 
 export function Inicio({ navigation }) {
+
+   const [getEmail, setEmail] = useState();
+   const [getSenha, setSenha] = useState();
+
+   async function login() {
+        await axios.post('http://10.0.0.100:9090/auth',{
+          email: getEmail,
+          senha: getSenha 
+        })
+        .then((response) => {
+          setEmail('')
+          setSenha('')
+          response.data ? navigation.navigate('Listagem') : alert('Usuário incorreto!')
+        })
+
+        
+        .catch(error => console.log(error))
+    }
 
   
   return (
@@ -30,15 +49,19 @@ export function Inicio({ navigation }) {
 
         <View style={styles.formStyle}>
             <Input 
-                label="Login" 
-                placeholder="Login"
-                containerStyle={styles.inputContainerStyle} 
+                label="Email" 
+                placeholder="Email"
+                containerStyle={styles.inputContainerStyle}
+                onChangeText={text=>setEmail(text)}
+                value={getEmail}
                 />
             <Input
                 secureTextEntry={true}
                 label="Senha"
                 placeholder="Senha" 
                 containerStyle={styles.inputContainerStyle}
+                onChangeText={text=>setSenha(text)}
+                value={getSenha}
                 />
             
         </View>
@@ -47,7 +70,8 @@ export function Inicio({ navigation }) {
             <Button 
                 title="Entrar"
                 buttonStyle={styles.button}
-                onPress={()=>navigation.navigate('Listagem')}
+
+                onPress={()=>login()}
             />
             <Button 
                 title="Cadastrar-se"
