@@ -22,9 +22,9 @@ export const getLogin = (request, response) =>{
     db.query(busca, (err, data) => {
         if(err) return response.json(err);
         
-        /* console.log(data)
-        response.json(data[0]) */
-        return response.status(200).json(data)
+        console.log(data)
+        response.json(data[0])
+        /* return response.status(200).json(data) */
     })
 }
 
