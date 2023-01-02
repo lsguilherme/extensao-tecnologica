@@ -1,0 +1,19 @@
+#container{
+    width: 100vw;
+    height: 100vh;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#background{
+    background-color: gray;
+    padding: 240px;
+    color: white;
+}
+
+a:hover{
+    background-color: black;
+}

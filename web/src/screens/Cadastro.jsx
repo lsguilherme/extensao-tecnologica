@@ -1,12 +1,12 @@
-import './Login.css'
+import React from 'react';
+import './Cadastro.css'
 
-function Login() {
-  
-  return (
-    <>
+function Cadastro() {
+    return(
+        <>
       <div id="container">
         <div id="loginContainer">
-          <h1>Login</h1>
+          <h1>Cadastro de Usuário</h1>
 
           <form id="formContainer">
             <div className='input'>
@@ -15,16 +15,21 @@ function Login() {
             </div>
 
             <div className='input'>
+              <label htmlFor="email">Email</label>
+              <input type="email" id="email"/>
+            </div>
+
+            <div className='input'>
               <label htmlFor="senha">Senha</label>
               <input type="password" id="senha"/>
             </div>
 
-            <button type="submit">ACESSAR</button>
+            <a href='/'>Cadastrar</a>
           </form>
         </div>
       </div>
     </>
-  )
+    )
 }
 
-export default Login
+export default Cadastro;
